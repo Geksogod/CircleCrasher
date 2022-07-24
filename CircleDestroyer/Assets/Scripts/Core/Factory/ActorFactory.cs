@@ -20,11 +20,6 @@ namespace Core.Factory
         {
             var actorPrefab = _actorContainer.GetActorByType(actorType);
             
-            if (actorPrefab == null)
-            {
-                throw new NullReferenceException($"Can't find actor by type - {actorType}");
-            }
-            
             var newActor = _container.InstantiatePrefab(actorPrefab,position, Quaternion.identity, new GameObject().transform).GetComponent<Actor>();
             return newActor;
         }

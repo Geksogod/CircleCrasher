@@ -1,5 +1,6 @@
 ﻿using Core.ActorModel;
 using Core.Factory;
+using Core.InputModule;
 using UnityEngine;
 
 namespace Core.GameInitializer
@@ -8,9 +9,10 @@ namespace Core.GameInitializer
     {
         private ActorFactoryHolder _actorFactory;
         
-        public GameplayRunner(ActorFactoryHolder actorFactory)
+        public GameplayRunner(ActorFactoryHolder actorFactory,InputProcess _input)
         {
             _actorFactory = actorFactory;
+            Debug.LogError(_input);
             GameStart();
         }
 

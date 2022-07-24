@@ -15,3 +15,8 @@ MonoBehaviour:
   _actorContainerItems:
   - _actorType: 0
     _actor: {fileID: 8102214990682218767, guid: 32db74687a2056e41b83935fe206ed49, type: 3}
+    _assetReferenceSprite:
+      m_AssetGUID: 4d692f42806e5794682f0530c168b6e0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

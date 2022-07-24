@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ActorSprite
+  m_EditorClassIdentifier: 
+  m_GroupName: ActorSprite
+  m_Data:
+    m_SerializedData: []
+  m_GUID: aecfa0e0b841e3046a6870214f1a85e2
+  m_SerializeEntries:
+  - m_GUID: 4d692f42806e5794682f0530c168b6e0
+    m_Address: ActorSprite/ActorPlayer
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ActorSprite
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9f874a3e769d79f4cb1601f25f5f8146, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b3b09fc1e8af7014dbdec7fc72b5af2f, type: 2}
+    - {fileID: 11400000, guid: 40b33346855c33d478e06e0c3962ccfd, type: 2}
