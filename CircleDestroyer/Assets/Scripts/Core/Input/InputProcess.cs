@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.CameraModule;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 using Input = UnityEngine.Input;
 
@@ -29,19 +30,17 @@ namespace Core.InputModule
 
         private void ProcessEditorInput()
         {
-            var screenPos = _camera.Camera.ScreenToWorldPoint(Input.mousePosition);
             if (Input.GetMouseButtonDown(0))
             {
-                OnBeginDrag?.Invoke(screenPos);
+                SendEvent(OnBeginDrag, Input.mousePosition);
             }
             else if (Input.GetMouseButton(0))
             {
-                OnDrag?.Invoke(screenPos);
+                SendEvent(OnDrag, Input.mousePosition);
             }
-
             if (Input.GetMouseButtonUp(0))
             {
-                OnEndDrag?.Invoke(screenPos);
+                SendEvent(OnEndDrag, Input.mousePosition);
             }
         }
 
@@ -59,8 +58,7 @@ namespace Core.InputModule
                     _curFingerId = -1;
                     if (_lastScreenPos != null)
                     {
-                        var pos = _camera.Camera.ScreenToWorldPoint(_lastScreenPos.Value);
-                        OnEndDrag?.Invoke(pos);
+                        SendEvent(OnEndDrag, _lastScreenPos.Value);
                     }
 
                     _lastScreenPos = null;
@@ -74,16 +72,13 @@ namespace Core.InputModule
                 if (_lastTouchPhase == TouchPhase.Began)
                 {
                     _curFingerId = firstTouch.fingerId;
-
-                    var pos = _camera.Camera.ScreenToWorldPoint(firstTouch.position);
-                    OnBeginDrag?.Invoke(pos);
+                    SendEvent(OnBeginDrag, firstTouch.position);
                 }
                 else if (_lastTouchPhase != TouchPhase.Ended)
                 {
                     if (_curFingerId == -1) return;
-                    
-                    var pos = _camera.Camera.ScreenToWorldPoint(firstTouch.position);
-                    OnDrag?.Invoke(pos);
+                    SendEvent(OnDrag, firstTouch.position);
+                    _lastScreenPos = firstTouch.position;
                 }
             }
             else
@@ -93,6 +88,12 @@ namespace Core.InputModule
                 OnEndDrag.Invoke(_lastScreenPos.Value);
                 _lastScreenPos = null;
             }
+        }
+
+        private void SendEvent(Action<Vector3> dragEvent,Vector3 position)
+        {
+            var pos = _camera.Camera.ScreenToWorldPoint(position);
+            dragEvent.Invoke(pos);
         }
     }
 }

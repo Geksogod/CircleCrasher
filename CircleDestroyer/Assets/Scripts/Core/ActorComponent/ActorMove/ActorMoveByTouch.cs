@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Core.InputModule;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -20,13 +19,17 @@ namespace Core.ActorModel
         private bool _isMove;
         private bool _isSkipNewMove;
         
-
         public override void Configurate(Actor actor)
         {
             base.Configurate(actor);
             _inputProcess.OnDrag += OnDrag;
             _inputProcess.OnBeginDrag += OnBeginDrag;
             _inputProcess.OnEndDrag += OnEndDrag;
+        }
+        
+        private void Update()
+        {
+            Move();
         }
 
         private void OnEndDrag(Vector3 obj)
@@ -63,11 +66,6 @@ namespace Core.ActorModel
             {
                 _cashedPos.Add(dragPos);
             }
-        }
-        
-        private void Update()
-        {
-            Move();
         }
 
         private void Move()
