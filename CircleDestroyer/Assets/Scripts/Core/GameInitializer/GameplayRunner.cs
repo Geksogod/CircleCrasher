@@ -12,7 +12,6 @@ namespace Core.GameInitializer
         public GameplayRunner(ActorFactoryHolder actorFactory,InputProcess _input)
         {
             _actorFactory = actorFactory;
-            Debug.LogError(_input);
             GameStart();
         }
 
