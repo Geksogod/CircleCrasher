@@ -10,9 +10,9 @@ namespace Core.ActorModel
     {
         [Inject] private InputProcess _inputProcess;
         
-        private const float StartSpeed = 10f;
-        private const float SpeedLossByTime = 1f;
-        private const float MinSpeed = 6f;
+        private const float StartSpeed = 0.9f;
+        private const float SpeedLossByTime = 0.999f;
+        private const float MinSpeed = 0.6f;
         
         private readonly List<Vector2> _cashedPos = new();
         private float _currentSpeed;
@@ -27,7 +27,7 @@ namespace Core.ActorModel
             _inputProcess.OnEndDrag += OnEndDrag;
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
         }
@@ -83,15 +83,20 @@ namespace Core.ActorModel
                 Move();
             }
             
-            var speed = Time.deltaTime * _currentSpeed;
+            var moveStep = (_currentSpeed * Time.deltaTime ) * 25f;
             
             ComponentActor.transform.position = 
-                Vector2.MoveTowards(ComponentActor.transform.position, firstPos, speed);
+                Vector2.MoveTowards(ComponentActor.transform.position, firstPos, moveStep);
 
             if (_currentSpeed > MinSpeed)
             {
-                _currentSpeed -= Time.deltaTime * SpeedLossByTime;
+                _currentSpeed *= SpeedLossByTime;
             }
+        }
+
+        public void Stop()
+        {
+            _cashedPos.Clear();
         }
     }
 }
