@@ -1,23 +1,27 @@
-﻿using Core.ActorModel;
+﻿using System;
+using Core.ActorModel;
 using Core.Factory;
-using Core.InputModule;
 using UnityEngine;
+using Zenject;
 
 namespace Core.GameInitializer
 {
-    public class GameplayRunner
+    public class GameplayRunner : MonoBehaviour
     {
-        private ActorFactoryHolder _actorFactory;
+        [Inject]private ActorFactoryHolder _actorFactory;
         
-        public GameplayRunner(ActorFactoryHolder actorFactory,InputProcess _input)
+        //TODO: Create LevelContainer.cs and move
+        [SerializeField] private Transform _actorContainer;
+        public Transform ActorContainer => _actorContainer;
+        
+        private void Start()
         {
-            _actorFactory = actorFactory;
             GameStart();
         }
 
         private void GameStart()
         {
-            _actorFactory.Create(ActorType.Player,Vector2.zero);
+            _actorFactory.Create(ActorType.Player,Vector2.zero,_actorContainer);
         }
     }
 }

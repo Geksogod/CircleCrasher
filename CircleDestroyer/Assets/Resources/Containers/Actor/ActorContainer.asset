@@ -20,3 +20,10 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
+  - _actorType: 1
+    _actor: {fileID: 298571098480209049, guid: bedca0c2424f6a44fa29b048673460cd, type: 3}
+    _assetReferenceSprite:
+      m_AssetGUID: 0c1edb1dd827b624187fbbb52057def2
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

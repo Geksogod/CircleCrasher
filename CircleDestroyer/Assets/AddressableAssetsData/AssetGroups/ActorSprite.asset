@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ActorSprite
+  - m_GUID: 0c1edb1dd827b624187fbbb52057def2
+    m_Address: ActorSprite/ActorEnemy
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ActorSprite
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9f874a3e769d79f4cb1601f25f5f8146, type: 2}
   m_SchemaSet:

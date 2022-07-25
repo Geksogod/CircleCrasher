@@ -1,6 +1,8 @@
 using Core.ActorModel;
+using Core.Events;
 using Core.Factory;
 using Core.InputModule;
+using Core.Spawner;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +16,8 @@ public class ActorInstaller : ScriptableObjectInstaller<ActorInstaller>
     {
         Container.Bind<ActorContainer>().FromResource(ActorContainerPath).AsSingle();
         Container.Bind<InputOnActor>().FromNew().AsSingle().NonLazy();
-        Container.BindFactory<ActorType,Vector2,Actor, ActorFactoryHolder>().FromFactory<ActorFactory>();
+        Container.Bind<EnemySpawner>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+        Container.BindFactory<ActorType,Vector2,Transform,Actor,ActorFactoryHolder>().FromFactory<ActorFactory>();
+        Container.DeclareSignal<OnEnemyDestroySignal>();
     }
 }

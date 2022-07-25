@@ -7,6 +7,7 @@ namespace Core.ActorModel
     {
         private ActorComponent[] _actorComponents;
         public IEnumerable<ActorComponent> ActorComponents => _actorComponents;
+        public ActorType ActorType { get; private set; }
 
         private void Awake()
         {
@@ -19,6 +20,11 @@ namespace Core.ActorModel
             {
                 actorComponent.Configurate(this);
             }
+        }
+
+        public void Configurate(ActorType actorType)
+        {
+            ActorType = actorType;
         }
 
         public void OnTouch()

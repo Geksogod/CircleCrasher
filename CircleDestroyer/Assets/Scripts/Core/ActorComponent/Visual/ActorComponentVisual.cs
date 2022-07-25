@@ -12,7 +12,7 @@ namespace Core.ActorModel
         {
             base.Configurate(actor);
             _renderer.enabled = true;
-            _renderer.sprite = actorContainer.GetActorSprite(ActorType.Player);
+            _renderer.sprite = actorContainer.GetActorSprite(ComponentActor.ActorType);
         }
     }
 }

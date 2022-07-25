@@ -1,18 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Core.InputModule;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
 namespace Core.ActorModel
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class ActorMoveByTouch : ActorComponent
     {
         [Inject] private InputProcess _inputProcess;
         
+        [SerializeField] private Rigidbody2D _rigidbody;
+        
         private const float StartSpeed = 0.9f;
         private const float SpeedLossByTime = 0.999f;
-        private const float MinSpeed = 0.6f;
+        private const float MinSpeed = 0.1f;
         
         private readonly List<Vector2> _cashedPos = new();
         private float _currentSpeed;
@@ -76,17 +80,17 @@ namespace Core.ActorModel
                 return;
             }
             var firstPos = _cashedPos.First();
-
             if (Vector2.Distance(firstPos, transform.position) <= 0.01f)
             {
                 _cashedPos.RemoveAt(0);
                 Move();
             }
             
-            var moveStep = (_currentSpeed * Time.deltaTime ) * 25f;
+            var moveStep = (_currentSpeed * Time.fixedDeltaTime ) * 25f;
             
-            ComponentActor.transform.position = 
+            var nextPos = 
                 Vector2.MoveTowards(ComponentActor.transform.position, firstPos, moveStep);
+            _rigidbody.DOMove(nextPos,Time.fixedDeltaTime);
 
             if (_currentSpeed > MinSpeed)
             {
