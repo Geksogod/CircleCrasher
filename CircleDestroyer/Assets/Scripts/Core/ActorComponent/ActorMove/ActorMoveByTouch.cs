@@ -31,7 +31,7 @@ namespace Core.ActorModel
             _inputProcess.OnEndDrag += OnEndDrag;
         }
         
-        private void FixedUpdate()
+        private void Update()
         {
             Move();
         }
