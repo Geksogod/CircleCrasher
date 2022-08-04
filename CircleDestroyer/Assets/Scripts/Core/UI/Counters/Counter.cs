@@ -11,7 +11,7 @@ namespace Core.UI.Counters
 
         protected void SetValue(float value)
         {
-            _text.text = value.ToString(CultureInfo.InvariantCulture);
+            _text.text = ((int)value).ToString(CultureInfo.InstalledUICulture);
         }
 
         public virtual void UpdateValue()

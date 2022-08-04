@@ -11,7 +11,7 @@ namespace Core.UI
         [Inject] private SignalBus _signalBus;
         [SerializeField]private Counter[] _counters;
 
-        private void Start()
+        private void Awake()
         {
             _signalBus.Subscribe<PlayerDataUpdateSignal>(OnDataUpdate);
         }

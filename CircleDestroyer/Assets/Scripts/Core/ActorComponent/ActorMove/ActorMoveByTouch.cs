@@ -16,7 +16,7 @@ namespace Core.ActorModel
         
         [SerializeField] private Rigidbody2D _rigidbody;
         
-        private const float StartSpeed = 0.9f;
+        private const float StartSpeed = 0.4f;
         private const float SpeedLossByTime = 0.999f;
         private const float MinSpeed = 0.1f;
         
@@ -33,7 +33,7 @@ namespace Core.ActorModel
             _inputProcess.OnEndDrag += OnEndDrag;
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
             Move();
         }
@@ -88,13 +88,14 @@ namespace Core.ActorModel
                 Move();
             }
             
-            var moveStep = (_currentSpeed * Time.fixedDeltaTime ) * 25f;
+            var moveStep = (_currentSpeed * Time.deltaTime ) * 25f;
             
             var nextPos = 
                 Vector2.MoveTowards(ComponentActor.transform.position, firstPos, moveStep);
-            _rigidbody.DOMove(nextPos,Time.fixedDeltaTime);
+            _rigidbody.MovePosition(nextPos);
             
-            _signalBus.Fire(new ScoreUpdateSignal{Score = 1 * _currentSpeed * Time.deltaTime});
+            Debug.Log($"Current speed : {moveStep}");
+            _signalBus.Fire(new ScoreUpdateSignal{Score = 1 * moveStep});
             
             if (_currentSpeed > MinSpeed)
             {

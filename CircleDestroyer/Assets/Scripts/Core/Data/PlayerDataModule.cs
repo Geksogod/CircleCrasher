@@ -44,6 +44,8 @@ namespace Core.Data
         #region SaveLoad
         public void Save()
         {
+            CurrentData ??= new GameData();
+            
             var bf = new BinaryFormatter();
             var file = File.Create(_dataPath);
             bf.Serialize(file, CurrentData);

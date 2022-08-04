@@ -23,9 +23,9 @@ namespace Core.GameInitializer
 
         private void GameStart()
         {
+            _actorFactory.Create(ActorType.Player,Vector2.zero,_actorContainer);
             _saveLoadModel.Load();
             _saveLoadModel.Save();
-            _actorFactory.Create(ActorType.Player,Vector2.zero,_actorContainer);
         }
 
         private void OnDestroy()
