@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Events;
 using Core.InputModule;
 using DG.Tweening;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Core.ActorModel
     [RequireComponent(typeof(Rigidbody2D))]
     public class ActorMoveByTouch : ActorComponent
     {
+        [Inject] private SignalBus _signalBus;
         [Inject] private InputProcess _inputProcess;
         
         [SerializeField] private Rigidbody2D _rigidbody;
@@ -91,7 +93,9 @@ namespace Core.ActorModel
             var nextPos = 
                 Vector2.MoveTowards(ComponentActor.transform.position, firstPos, moveStep);
             _rigidbody.DOMove(nextPos,Time.fixedDeltaTime);
-
+            
+            _signalBus.Fire(new ScoreUpdateSignal{Score = 1 * _currentSpeed * Time.deltaTime});
+            
             if (_currentSpeed > MinSpeed)
             {
                 _currentSpeed *= SpeedLossByTime;
